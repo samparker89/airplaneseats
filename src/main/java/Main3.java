@@ -24,18 +24,18 @@ public class Main3 {
         if(!NO_SEAT_RESERVATIONS.equals(takenSeats)) {
             for (int i = 1; i <= noRows; i++) {
 
-                Pattern patternA = createRegexp(REGEX_IS_ONE_OF_LEFT_SEATS_TAKEN, i);
-                Pattern patternB = createRegexp(REGEX_IS_ONE_OF_CENTRE_SEATS_TAKEN, i);
-                Pattern patternC = createRegexp(REGEX_ARE_BOTH_END_SEATS_TAKE_IN_CENTER_BLOCK, i);
-                Pattern patternD = createRegexp(REGEX_IS_ONE_OF_RIGHT_SEATS_TAKEN, i);
+                String patternA = createRegexp(REGEX_IS_ONE_OF_LEFT_SEATS_TAKEN, i);
+                String patternB = createRegexp(REGEX_IS_ONE_OF_CENTRE_SEATS_TAKEN, i);
+                String patternC = createRegexp(REGEX_ARE_BOTH_END_SEATS_TAKE_IN_CENTER_BLOCK, i);
+                String patternD = createRegexp(REGEX_IS_ONE_OF_RIGHT_SEATS_TAKEN, i);
 
-                if (patternA.matcher(takenSeats).matches()) {
+                if (takenSeats.matches(patternA)) {
                     totalSpaces--;
                 }
-                if (patternB.matcher(takenSeats).matches() || patternC.matcher(takenSeats).matches()) {
+                if (takenSeats.matches(patternB) || takenSeats.matches(patternC)) {
                     totalSpaces--;
                 }
-                if (patternD.matcher(takenSeats).matches()) {
+                if (takenSeats.matches(patternD)) {
                     totalSpaces--;
                 }
             }
@@ -43,8 +43,8 @@ public class Main3 {
         return totalSpaces;
     }
 
-    private Pattern createRegexp(String regexp, int replacement){
+    private String createRegexp(String regexp, int replacement){
         String currentIteration = String.valueOf(replacement);
-        return Pattern.compile(regexp.replace(REGEX_REPLACE, currentIteration));
+        return regexp.replace(REGEX_REPLACE, currentIteration);
     }
 }
