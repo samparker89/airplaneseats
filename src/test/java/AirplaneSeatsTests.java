@@ -60,7 +60,7 @@ public class AirplaneSeatsTests {
     }
 
     @Test
-    public void testNumbersDontMatchNumbers(){
+    public void testSingleDigitNumbersDontMatchDoubleDigitIdenticalNumbers(){
         //GIVEN
         String input = "11A";
 
@@ -309,7 +309,7 @@ public class AirplaneSeatsTests {
     @Test
     public void testRowCalculatorAcceptsLotsOfRowsAndNoInput(){
         //GIVEN
-        String input = " ";
+        String input = "";
 
         //WHEN
         int result = airplaneSeats.solution(1000, input);
