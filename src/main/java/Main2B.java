@@ -14,10 +14,12 @@ public class Main2B {
 
     public int solution(int noRows, String seats){
 
-        if(NO_SEAT_RESERVATIONS.equals(seats)) {
-            return noRows * TOTAL_VACANT_BLOCKS_PER_ROW;
-        }
+        int totalSpaces = noRows * TOTAL_VACANT_BLOCKS_PER_ROW;
 
+        return NO_SEAT_RESERVATIONS.equals(seats) ? totalSpaces : calculateTakenSeats(noRows, seats);
+    }
+
+    private int calculateTakenSeats(int noRows, String seats) {
         //Add a space to the start of taken seats. This ensures when checking the strings for whole words, we match whole
         //words only. e.g. looking for "1A" in "11A" would return true. We do not want this. We could also use a regexp
         //in this scenario or also split and do a List.Contains.
