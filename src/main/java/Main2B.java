@@ -1,14 +1,14 @@
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Main2B {
 
     private static final int TOTAL_VACANT_BLOCKS_PER_ROW = 3;
     private static final String NO_SEAT_RESERVATIONS = "";
-    private static final String LEFT_SEAT_BLOCK = "ABC";
-    private static final String MIDDLE_SEAT_BLOCK_A = "DEF";
-    private static final String MIDDLE_SEAT_BLOCK_B = "EFG";
-    private static final String RIGHT_SEAT_BLOCK = "HJK";
+    private static final List<String> LEFT_SEAT_BLOCK = List.of("A", "B", "C");
+    private static final List<String> MIDDLE_SEAT_BLOCK_A = List.of("D", "E", "F");
+    private static final List<String> MIDDLE_SEAT_BLOCK_B = List.of("E", "F", "G");
+    private static final List<String> RIGHT_SEAT_BLOCK = List.of("H", "J", "K");
+    private static final String WHOLE_WORD_FORMAT = " %s%s";
 
     private String takenSeats = "";
 
@@ -42,15 +42,10 @@ public class Main2B {
         return totalSpaces;
     }
 
-    private boolean isBlockFree(int row, String token){
-        List<Character> seatsToCheck = token
-                .chars()
-                .mapToObj(c -> (char) c)
-                .collect(Collectors.toList());
-
-        long count = seatsToCheck
+    private boolean isBlockFree(int row, List<String> token){
+        long count = token
                 .stream()
-                .filter(letter -> takenSeats.contains(" " + row + letter))
+                .filter(letter -> takenSeats.contains(String.format(WHOLE_WORD_FORMAT, row, letter)))
                 .count();
 
         return count == 0;
