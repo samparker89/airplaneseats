@@ -43,11 +43,8 @@ public class Main2B {
     }
 
     private boolean isBlockFree(int row, List<String> token){
-        long count = token
+        return token
                 .stream()
-                .filter(letter -> takenSeats.contains(String.format(WHOLE_WORD_FORMAT, row, letter)))
-                .count();
-
-        return count == 0;
+                .noneMatch(letter -> takenSeats.contains(String.format(WHOLE_WORD_FORMAT, row, letter)));
     }
 }
